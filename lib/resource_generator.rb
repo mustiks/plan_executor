@@ -174,7 +174,6 @@ module Crucible
       def self.minimal_patient(identifier='0',name='Name', namespace = FHIR)
         resource = namespace.const_get(:Patient).new
         resource.identifier = [ minimal_identifier(identifier) ]
-        resource.text = minimal_text()
         resource.name = [ minimal_humanname(name) ]
         tag_metadata(resource)
       end
