@@ -174,6 +174,7 @@ module Crucible
       def self.minimal_patient(identifier='0',name='Name', namespace = FHIR)
         resource = namespace.const_get(:Patient).new
         resource.identifier = [ minimal_identifier(identifier) ]
+        resource.text = [ minimal_text() ]
         resource.name = [ minimal_humanname(name) ]
         tag_metadata(resource)
       end
@@ -237,6 +238,13 @@ module Crucible
         ref = namespace.const_get(:Reference).new
         ref.display = "#{text} #{SecureRandom.base64}"
         ref
+      end
+
+      def self.minimal_text(namespace = FHIR)
+        txt = namespace.const_get(:Text).new
+        txt.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\">#{SecureRandom.base64}</div>"
+        txt.status = "generated"
+        txt
       end
 
       # Common systems:
