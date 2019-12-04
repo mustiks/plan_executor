@@ -23,7 +23,7 @@ module Crucible
         rescue
           # try to create a patient
           begin
-            @patient = get_resource(:Patient).new(meta: { tag: [{ system: 'http://projectcrucible.org', code: 'testdata'}] }, name: { family: 'Emerald', given: 'Caro' })
+            @patient = get_resource(:Patient).new(meta: { tag: [{ system: 'http://projectcrucible.org', code: 'testdata'}] }, name: { family: 'Emerald', given: 'Caro' }, text: { status: 'generated', div: '<div xmlns=\"http://www.w3.org/1999/xhtml\">olololo</div>'})
             @patient_created = true
           rescue
             @patient = nil
