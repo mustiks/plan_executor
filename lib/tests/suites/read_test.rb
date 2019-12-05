@@ -21,7 +21,6 @@ module Crucible
           @resources = Crucible::Generator::Resources.new(fhir_version)
           
           @patient = ResourceGenerator.generate(get_resource(:Patient),1).create
-          result = @client.create(@patient)
           @patient = result
           @patient_created = true
         rescue
