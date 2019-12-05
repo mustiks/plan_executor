@@ -19,12 +19,8 @@ module Crucible
         # try create a patient
         begin
           @resources = Crucible::Generator::Resources.new(fhir_version)
-          @patient = @resources.minimal_patient
-          @patient.identifier = [get_resource(:Identifier).new]
-          @patient.identifier[0].value = SecureRandom.urlsafe_base64
-          @patient.text = [get_resource(:Narrative).new]
-          @patient.text.div = '<div xmlns=\"http://www.w3.org/1999/xhtml\">#{SecureRandom.base64}</div>'
-          @patient.text.status = 'generated'
+          
+          @patient = ResourceGenerator.generate(get_resource(:Patient),1).create
           result = @client.create(@patient)
           @patient = result
           @patient_created = true
