@@ -1002,6 +1002,7 @@ module Crucible
           resource.activity.each do |a|
             unless a.detail.nil?
               a.reference = nil
+              a.detail.kind = 'Appointment'
               a.detail.dailyAmount.comparator = nil unless a.detail.dailyAmount.nil?
               a.detail.quantity.comparator = nil unless a.detail.quantity.nil?
             end
