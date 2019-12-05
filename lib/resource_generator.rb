@@ -175,7 +175,7 @@ module Crucible
         resource = namespace.const_get(:Patient).new
         resource.identifier = [ minimal_identifier(identifier) ]
         resource.name = [ minimal_humanname(name) ]
-        resource.text = [ minimal_text() ]
+        resource.text = minimal_text() 
         tag_metadata(resource)
       end
 
