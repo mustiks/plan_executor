@@ -250,8 +250,8 @@ module Crucible
 
       def self.minimal_text(namespace = FHIR)
         txt = namespace.const_get(:Narrative).new
-        txt.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\">#{SecureRandom.base64}</div>"
-        txt.status = "generated"
+        txt.div = '<div xmlns=\"http://www.w3.org/1999/xhtml\">#{SecureRandom.base64}</div>'
+        txt.status = 'generated'
         txt
       end
 
