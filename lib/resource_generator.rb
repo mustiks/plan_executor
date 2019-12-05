@@ -247,13 +247,6 @@ module Crucible
         ref
       end
 
-      def self.minimal_text(namespace = FHIR)
-        txt = namespace.const_get(:Narrative).new
-        txt.div = '<div xmlns=\"http://www.w3.org/1999/xhtml\">#{SecureRandom.base64}</div>'
-        txt.status = 'generated'
-        txt
-      end
-
       # Common systems:
       #   SNOMED  http://snomed.info/sct
       #   LOINC   http://loinc.org
@@ -362,6 +355,9 @@ module Crucible
           resource.participant.each do |p|
             p.onBehalfOf = nil
           end
+        when FHIR::ClinicalImpression
+          resource.status = 'completed'
+        end
         when FHIR::CodeSystem
           resource.concept.each do |c|
             c.concept.each do |d|
