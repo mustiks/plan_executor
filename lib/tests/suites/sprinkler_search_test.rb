@@ -184,7 +184,7 @@ module Crucible
         reply = @client.search(get_resource(:Patient), options)
         assert_response_ok(reply)
         assert_bundle_response(reply)
-        assert_equal expected, reply.resource.total, 'The server did not report the expected number of results.'
+        warning { assert_equal expected, reply.resource.total, 'The server did not report the expected number of results.' }
       end
 
       test "SE04#{action[0]}", 'Search patient resource on given name' do
@@ -228,7 +228,7 @@ module Crucible
         reply = @client.search(get_resource(:Patient), options)
         assert_response_ok(reply)
         assert_bundle_response(reply)
-        assert_equal expected, reply.resource.total, 'The server did not report the expected number of results.'
+        warning { assert_equal expected, reply.resource.total, 'The server did not report the expected number of results.' }
       end
 
       test "SE05.0#{action[0]}", 'Search condition by patient reference url (partial)' do
@@ -671,7 +671,7 @@ module Crucible
         reply = @client.search(get_resource(:Patient), options)
         assert_response_ok(reply)
         assert_bundle_response(reply)
-        assert_equal expected, reply.resource.total, 'The server did not report the expected number of results.'
+        warning { assert_equal expected, reply.resource.total, 'The server did not report the expected number of results.' }
       end
 
       test "SE24#{action[0]}", 'Search with non-existing parameter' do
