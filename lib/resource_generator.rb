@@ -357,7 +357,6 @@ module Crucible
           end
         when FHIR::ClinicalImpression
           resource.status = 'completed'
-        end
         when FHIR::CodeSystem
           resource.concept.each do |c|
             c.concept.each do |d|
