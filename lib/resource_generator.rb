@@ -372,6 +372,8 @@ module Crucible
               # end
             end
           end
+        when FHIR::Coverage
+          resource.costToBeneficiary = nil
         when FHIR::Claim
           resource.item.each do |item|
             # item.category = minimal_codeableconcept('http://hl7.org/fhir/benefit-subcategory','35')
