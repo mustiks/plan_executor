@@ -16,18 +16,12 @@ module Crucible
       end
 
       def setup
-        # try to find a patient
+        # try create a patient
         begin
-          response = @client.read_feed(get_resource(:Patient))
-          @patient = response.resource.entry.first.resource
+          @patient = get_resource(:Patient).new(meta: { tag: [{ system: 'http://projectcrucible.org', code: 'testdata'}] }, name: { family: 'Emerald', given: 'Caro' }, text: { status: 'generated', div: '<div xmlns=\"http://www.w3.org/1999/xhtml\">olololo</div>'})
+          @patient_created = true
         rescue
-          # try to create a patient
-          begin
-            @patient = get_resource(:Patient).new(meta: { tag: [{ system: 'http://projectcrucible.org', code: 'testdata'}] }, name: { family: 'Emerald', given: 'Caro' }, text: { status: 'generated', div: '<div xmlns=\"http://www.w3.org/1999/xhtml\">olololo</div>'})
-            @patient_created = true
-          rescue
-            @patient = nil
-          end
+          @patient = nil
         end
       end
 
