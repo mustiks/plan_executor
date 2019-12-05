@@ -168,8 +168,8 @@ module Crucible
         @obs2 = ResourceGenerator.minimal_observation('http://loinc.org','3141-9',100,'kg',@patient0.id)
         # obesity has been refuted
         @condition0.subject.reference = "Patient/#{@patient0.id}"
-        @condition0.clinicalStatus = 'resolved'
-        @condition0.verificationStatus = 'refuted'
+        @condition0.clinicalStatus = ResourceGenerator.minimal_codeableconcept('http://terminology.hl7.org/CodeSystem/condition-clinical','resolved')
+        @condition0.verificationStatus = ResourceGenerator.minimal_codeableconcept('http://terminology.hl7.org/CodeSystem/condition-ver-status','confirmed')
         @condition0.abatementString = 'Abated at unknown date'
 
         @client.begin_transaction
