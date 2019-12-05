@@ -175,6 +175,7 @@ module Crucible
         resource = namespace.const_get(:Patient).new
         resource.identifier = [ minimal_identifier(identifier) ]
         resource.name = [ minimal_humanname(name) ]
+        resource.text = [ minimal_text() ]
         tag_metadata(resource)
       end
 
@@ -226,6 +227,15 @@ module Crucible
         hn
       end
 
+      def self.minimal_humanname(name='Name', namespace = FHIR)
+        hn = namespace.const_get(:HumanName).new
+        hn.use = 'official'
+        hn.family = 'Crucible'
+        hn.given = [ name ]
+        hn.text = "#{hn.given[0]} #{hn.family}"
+        hn
+      end
+
       def self.textonly_codeableconcept(text='text', namespace = FHIR)
         concept = namespace.const_get(:CodeableConcept).new
         concept.text = text
@@ -239,7 +249,7 @@ module Crucible
       end
 
       def self.minimal_text(namespace = FHIR)
-        txt = namespace.const_get(:Text).new
+        txt = namespace.const_get(:Narrative).new
         txt.div = "<div xmlns=\"http://www.w3.org/1999/xhtml\">#{SecureRandom.base64}</div>"
         txt.status = "generated"
         txt

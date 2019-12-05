@@ -7,7 +7,7 @@ module Crucible
       end
 
       def description
-        'Initial Sprinkler tests (R001, R002, R003, R004) for testing basic READ requests.'
+        'Initial tests (R001, R002, R003, R004) for testing basic READ requests.'
       end
 
       def initialize(client1, client2=nil)
@@ -18,7 +18,12 @@ module Crucible
       def setup
         # try create a patient
         begin
-          @patient = get_resource(:Patient).new(meta: { tag: [{ system: 'http://projectcrucible.org', code: 'testdata'}] }, name: { family: 'Emerald', given: 'Caro' }, text: { status: 'generated', div: '<div xmlns=\"http://www.w3.org/1999/xhtml\">olololo</div>'})
+          @resources = Crucible::Generator::Resources.new(fhir_version)
+          @patient = @resources.minimal_patient
+          @patient.identifier = [get_resource(:Identifier).new]
+          @patient.identifier[0].value = SecureRandom.urlsafe_base64
+          result = @client.create(@patient)
+          @patient = result
           @patient_created = true
         rescue
           @patient = nil
