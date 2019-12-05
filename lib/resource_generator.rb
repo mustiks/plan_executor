@@ -349,6 +349,7 @@ module Crucible
               a.reference = nil
               a.detail.dailyAmount.comparator = nil unless a.detail.dailyAmount.nil?
               a.detail.quantity.comparator = nil unless a.detail.quantity.nil?
+              a.detail.kind = 'Appointment'
             end
           end
         when FHIR::CareTeam
