@@ -532,7 +532,7 @@ module Crucible
         reply = @client.search(get_resource(:Condition), options)
         assert_response_ok(reply)
         assert_bundle_response(reply)
-        assert reply.resource.total > 0, 'The server should have Conditions that _include=Condition:patient.'
+        assert reply.resource.entry.count > 0, 'The server should have Conditions that _include=Condition:patient.'
         has_patient = false
         reply.resource.entry.each do |entry|
           has_patient = true if (entry.resource && entry.resource.class == get_resource(:Patient))
@@ -563,7 +563,7 @@ module Crucible
         reply = @client.search(get_resource(:Patient), options)
         assert_response_ok(reply)
         assert_bundle_response(reply)
-        assert reply.resource.total > 0, 'The server should have Patients that are _revinclude=Condition:patient.'
+        assert reply.resource.entry.count > 0, 'The server should have Patients that are _revinclude=Condition:patient.'
         has_condition = false
         reply.resource.entry.each do |entry|
           has_condition = true if (entry.resource && entry.resource.class == get_resource(:Condition))
