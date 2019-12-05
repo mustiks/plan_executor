@@ -202,13 +202,13 @@ module Crucible
         # AuditEvent
         if resource_class == get_resource(:AuditEvent)
           count = (reply.resource.total-replyB.resource.total).abs
-          assert (count <= 1), 'Searching without criteria did not return all the results.'
+          warning{ assert (count <= 1), 'Searching without criteria did not return all the results.'}
         else
           assert !replyB.resource.nil?, 'Searching without criteria did not return any results.'
           assert !reply.resource.nil?, 'Searching without criteria did not return any results.'
-          assert !replyB.resource.total.nil?, 'Search bundle returned does not report a total entry count.'
-          assert !reply.resource.total.nil?, 'Search bundle returned does not report a total entry count.'
-          assert_equal replyB.resource.total, reply.resource.total, 'Searching without criteria did not return all the results.'
+          warning{ assert !replyB.resource.total.nil?, 'Search bundle returned does not report a total entry count.' } 
+          warning{ assert !reply.resource.total.nil?, 'Search bundle returned does not report a total entry count.' }
+          warning{ assert_equal replyB.resource.total, reply.resource.total, 'Searching without criteria did not return all the results.' }
         end
       end
     end
