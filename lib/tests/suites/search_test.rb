@@ -79,7 +79,7 @@ module Crucible
         searchParamNames = []
         searchParamNames = @searchParams.map { |item| item.name } if !@searchParams.nil?
         searchParamsDiff = @resource_class::SEARCH_PARAMS-searchParamNames 
-        assert (searchParamsDiff.size <= 0), "The server does not support the following params: #{searchParamsDiff.join(', ')}."
+        warning{ assert (searchParamsDiff.size <= 0), "The server does not support the following params: #{searchParamsDiff.join(', ')}." }
       end
 
       #
