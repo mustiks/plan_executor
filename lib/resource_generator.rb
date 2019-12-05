@@ -206,7 +206,6 @@ module Crucible
           resource.subject.display = 'Patient'
         end
         resource.code = minimal_codeableconcept(system,code, namespace)
-        resource.verificationStatus = 'confirmed'
         tag_metadata(resource)
       end
 
